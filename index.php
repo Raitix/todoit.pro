@@ -1,6 +1,3 @@
-<?
-phpinfo();
-?>
 <html>
 <head></head>
 <body>
@@ -8,7 +5,7 @@ phpinfo();
     <h2>Minimum viable version</h2>
     <ol>
         <li>Volt;</li>
-        <li>Lumen;</li>
+        <li>Lumen, Eloquent;</li>
         <li>Bootstrap, sb_admin2;</li>
         <li>Configure e-mails (admin@todoit.pro);</li>
         <li>Internal user registration (+login existence check)</li>

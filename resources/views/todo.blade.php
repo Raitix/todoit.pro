@@ -66,37 +66,38 @@
                             <!-- /.modal -->
 
                         </p>
-
+                
                         <!-- BEGIN status todo -->
 
-
-                        <!-- <div class="cf nestable-lists" id="accordion"> -->
-
-                            <div class="panel-group" id="accordion">
+                        <div class="col-md-3 panel-group" id="accor-nest-1">
+                            <div class="col-md-12 listNode dd-list">
 
                                 @for ($i = 0; $i < count($todos); $i++)
 
-                                    <!-- <div class="panel panel-{{-- To Do: here to echo sb_admin2 style --}}" id="panel-{{ $todos[$i]->id }}" data-id="{{ $todos[$i]->id }}"> -->
-                                    <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}" data-id="{{ $todos[$i]->id }}">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <i class="fa @if ($i === 0) fa-minus-square-o @else fa-plus-square-o @endif fa-fw"></i>
-                                                {{ $todos[$i]->title }}
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">
-                                                    <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
-                                                </a>
-                                            </h4>
-                                        </div>
+                                    <div class="col-md-12 itemNode dd-item" data-id="{{ $todos[$i]->id }}">
+                                        <!-- To Do: here to echo sb_admin2 style -->
+                                        <!-- To Do: check for id and data-id usage -->
+                                        <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}" data-id="{{ $todos[$i]->id }}">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <i class="fa @if ($i === 0) fa-minus-square-o @else fa-plus-square-o @endif fa-fw"></i>
+                                                    <i class="panel-handle fa fa-arrows fa-fw"></i>
+                                                    {{ $todos[$i]->title }}
+                                                    <a data-toggle="collapse" data-parent="#accor-nest-1" href="#collapse-{{ $todos[$i]->id }}">
+                                                        <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
                                             <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                            <div class="panel-body">{!! $todos[$i]->text !!}</div>
+                                                <div class="panel-body">{!! $todos[$i]->text !!}</div>
+                                            </div>
                                         </div>
                                     </div>
 
                                 @endfor
 
                             </div>
-
-                        <!-- </div> -->
+                        </div>
 
                         <!-- END status todo -->
                         
@@ -106,83 +107,55 @@
         </div>
     </div>
 
+        <div class="panel-group" id="nestable1">
 
+            <div class="listNode dd-list">
+                <div class="itemNode dd-item" data-id="42">
+                    <div class="panel-handle">Test join</div>
+                </div>
+            </div>
 
-
-
-    <div class="cf nestable-lists">
-
-        <div class="dd" id="nestable">
-            <ol class="dd-list">
-                <li class="dd-item" data-id="1">
-                    <div class="dd-handle">Item 1</div>
-                </li>
-                <li class="dd-item" data-id="2">
-                    <div class="dd-handle">Item 2</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-id="3"><div class="dd-handle">Item 3</div></li>
-                        <li class="dd-item" data-id="4"><div class="dd-handle">Item 4</div></li>
-                        <li class="dd-item" data-id="5">
-                            <div class="dd-handle">Item 5</div>
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="6"><div class="dd-handle">Item 6</div></li>
-                                <li class="dd-item" data-id="7"><div class="dd-handle">Item 7</div></li>
-                                <li class="dd-item" data-id="8"><div class="dd-handle">Item 8</div></li>
-                            </ol>
-                        </li>
-                        <li class="dd-item" data-id="9"><div class="dd-handle">Item 9</div></li>
-                        <li class="dd-item" data-id="10"><div class="dd-handle">Item 10</div></li>
-                    </ol>
-                </li>
-                <li class="dd-item" data-id="11">
-                    <div class="dd-handle">Item 11</div>
-                </li>
-                <li class="dd-item" data-id="12">
-                    <div class="dd-handle">Item 12</div>
-                </li>
-            </ol>
         </div>
 
-        <div class="dd" id="nestable2">
-            <ol class="dd-list">
-                <li class="dd-item" data-id="13">
-                    <div class="dd-handle">Item 13</div>
-                </li>
-                <li class="dd-item" data-id="14">
-                    <div class="dd-handle">Item 14</div>
-                </li>
-                <li class="dd-item" data-id="15">
-                    <div class="dd-handle">Item 15</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-id="16"><div class="dd-handle">Item 16</div></li>
-                        <li class="dd-item" data-id="17"><div class="dd-handle">Item 17</div></li>
-                        <li class="dd-item" data-id="18"><div class="dd-handle">Item 18</div></li>
-                    </ol>
-                </li>
-            </ol>
+        <div class="panel-group" id="nestable2">
+            <div class="listNode dd-list">
+                <div class="itemNode dd-item" data-id="413">
+                    <div class="panel-handle">Item 13</div>
+                </div>
+                <div class="itemNode dd-item" data-id="414">
+                    <div class="panel-handle">Item 14</div>
+                </div>
+                <div class="itemNode dd-item" data-id="415">
+                    <div class="panel-handle">Item 15</div>
+                    <div class="listNode dd-list">
+                        <div class="itemNode dd-item" data-id="416"><div class="panel-handle">Item 16</div></div>
+                        <div class="itemNode dd-item" data-id="417"><div class="panel-handle">Item 17</div></div>
+                        <div class="itemNode dd-item" data-id="418"><div class="panel-handle">Item 18</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="dd" id="nestable3">
-            <ol class="dd-list">
-                <li class="dd-item" data-id="19">
-                    <div class="dd-handle">To Do 1</div>
-                </li>
-                <li class="dd-item" data-id="20">
-                    <div class="dd-handle">To Do 2</div>
-                    <ol class="dd-list">
-                        <li class="dd-item" data-id="21"><div class="dd-handle">To Do 3</div></li>
-                        <li class="dd-item" data-id="22">
-                            <div class="dd-handle">To Do 5</div>
-                            <ol class="dd-list">
-                                <li class="dd-item" data-id="23"><div class="dd-handle">To Do 8</div></li>
-                            </ol>
-                        <li class="dd-item" data-id="24"><div class="dd-handle">To Do 10</div></li>
-                    </ol>
-                </li>
-            </ol>
+        <div class="panel-group" id="nestable3">
+            <div class="listNode dd-list">
+                <div class="itemNode dd-item" data-id="419">
+                    <div class="panel-handle">To Do 1</div>
+                </div>
+                <div class="itemNode dd-item" data-id="420">
+                    <div class="panel-handle">To Do 2</div>
+                    <div class="listNode dd-list">
+                        <div class="itemNode dd-item" data-id="421"><div class="panel-handle">To Do 3</div></div>
+                        <div class="itemNode dd-item" data-id="422">
+                            <div class="panel-handle">To Do 5</div>
+                            <div class="listNode dd-list">
+                                <div class="itemNode dd-item" data-id="423"><div class="panel-handle">To Do 8</div></div>
+                            </div>
+                        <div class="itemNode dd-item" data-id="424"><div class="panel-handle">To Do 10</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </div>
 
 
 
@@ -190,9 +163,10 @@
 
     <p><strong>Serialised Output (per list)</strong></p>
 
-    <textarea id="nestable-output"></textarea>
+    <textarea id="nestable1-output"></textarea>
     <textarea id="nestable2-output"></textarea>
     <textarea id="nestable3-output"></textarea>
+    <textarea id="accor-nest-1-output"></textarea>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>    
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -249,7 +223,7 @@
             };
 
             // activate Nestable for list 1
-            $('#nestable').nestable({
+            $('#nestable1').nestable({
                 group: 1
             }).on('change', updateOutput);
 
@@ -263,10 +237,16 @@
                 group: 1
             }).on('change', updateOutput);
 
+            // activate Nestable for list 3
+            $('#accor-nest-1').nestable({
+                group: 1
+            }).on('change', updateOutput);
+
             // output initial serialised data
-            updateOutput($('#nestable').data('output', $('#nestable-output')));
+            updateOutput($('#nestable1').data('output', $('#nestable1-output')));
             updateOutput($('#nestable2').data('output', $('#nestable2-output')));
             updateOutput($('#nestable3').data('output', $('#nestable3-output')));
+            updateOutput($('#accor-nest-1').data('output', $('#accor-nest-1-output')));
 
             $('#nestable-menu').on('click', function(e)
             {

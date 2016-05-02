@@ -27,13 +27,13 @@
     })();
 
     var defaults = {
-            listNodeName    : 'ol', // The HTML element to create for lists (default 'ol')
-            itemNodeName    : 'li', // The HTML element to create for list items (default 'li')
-            rootClass       : 'dd', // The class of the root element .nestable() was used on (default 'dd')
+            listNodeName    : 'div.listNode', // The HTML element to create for lists (default 'ol')
+            itemNodeName    : 'div.itemNode', // The HTML element to create for list items (default 'li')
+            rootClass       : 'panel-group', // The class of the root element .nestable() was used on (default 'dd')
             listClass       : 'dd-list', // The class of all list elements (default 'dd-list')
             itemClass       : 'dd-item', // The class of all list item elements (default 'dd-item')
             dragClass       : 'dd-dragel', // The class applied to the list element that is being dragged (default 'dd-dragel')
-            handleClass     : 'dd-handle', // The class of the content element inside each list item (default 'dd-handle')
+            handleClass     : 'panel-handle', // The class of the content element inside each list item (default 'dd-handle')
             collapsedClass  : 'dd-collapsed', // The class applied to lists that have been collapsed (default 'dd-collapsed')
             placeClass      : 'dd-placeholder', // The class of the placeholder element (default 'dd-placeholder')
             noDragClass     : 'dd-nodrag',

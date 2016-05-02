@@ -67,21 +67,11 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-
-                                            @if ($i === 1)
-
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">{{ $todos[$i]->title }}</a>
-
-                                            @else
-
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">{{ $todos[$i]->title }}</a>
-
-                                            @endif
-
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">{{ $todos[$i]->title }}</a>
                                         </h4>
                                     </div>
                                         <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                        <div class="panel-body">{{ $todos[$i]->text }}</div>
+                                        <div class="panel-body">{!! $todos[$i]->text !!}</div>
                                     </div>
                                 </div>
 

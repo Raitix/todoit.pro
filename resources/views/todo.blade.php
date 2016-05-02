@@ -30,7 +30,11 @@
                 <div class="col-md-12">
                     <div class="panel-body">
                         <p>
-                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTodoModal">Add To Do</button>
+                            <div id="nestable-menu">
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTodoModal">Add To Do</button>
+                                <button type="button" class="btn btn-default" data-action="expand-all">Expand All</button>
+                                <button type="button" class="btn btn-default" data-action="collapse-all">Collapse All</button>
+                            </div>
 
                             <!-- Modal -->
                                 <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModalLabel" aria-hidden="true">
@@ -63,72 +67,48 @@
 
                         </p>
 
-                        <div class="panel-group" id="accordion">
-
-                            @for ($i = 0; $i < count($todos); $i++)
-
-                                <div class="panel panel-default" id="panel-{{ $todos[$i]->id }}" >
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-
-                                            {{ $todos[$i]->title }}
-
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">
-                                                <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                        <div class="panel-body">{!! $todos[$i]->text !!}</div>
-                                    </div>
-                                </div>
-
-                            @endfor
-
-                        </div>
-
-
                         <!-- BEGIN status todo -->
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <i class="fa fa-plus-square-o fa-fw"></i>
-                                    To Do text
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-x1"><i class="fa fa-eye-slash fa-fw pull-right"></i></a>
-                                </h4>
-                            </div>
-                            <div id="collapse-x1" class="panel-collapse collapse ">
-                                <div class="panel-body">adsgas d</div>
-                            </div>
-                        </div>
 
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <i class="fa fa-minus-square-o fa-fw"></i>
-                                    To Do text
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-x2"><i class="fa fa-eye fa-fw pull-right"></i></a>
-                                </h4>
+
+                        <!-- <div class="cf nestable-lists" id="accordion"> -->
+
+                            <div class="panel-group" id="accordion">
+
+                                @for ($i = 0; $i < count($todos); $i++)
+
+                                    <!-- <div class="panel panel-{{-- To Do: here to echo sb_admin2 style --}}" id="panel-{{ $todos[$i]->id }}" data-id="{{ $todos[$i]->id }}"> -->
+                                    <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}" data-id="{{ $todos[$i]->id }}">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="fa @if ($i === 0) fa-minus-square-o @else fa-plus-square-o @endif fa-fw"></i>
+                                                {{ $todos[$i]->title }}
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">
+                                                    <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                            <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
+                                            <div class="panel-body">{!! $todos[$i]->text !!}</div>
+                                        </div>
+                                    </div>
+
+                                @endfor
+
                             </div>
-                            <div id="collapse-x2" class="panel-collapse collapse ">
-                                <div class="panel-body">adsgas d</div>
-                            </div>
-                        </div>
+
+                        <!-- </div> -->
+
                         <!-- END status todo -->
                         
-
-
-                            
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <menu id="nestable-menu">
-        <button type="button" data-action="expand-all">Expand All</button>
-        <button type="button" data-action="collapse-all">Collapse All</button>
-    </menu>
+
+
+
 
     <div class="cf nestable-lists">
 
@@ -182,6 +162,26 @@
             </ol>
         </div>
 
+        <div class="dd" id="nestable3">
+            <ol class="dd-list">
+                <li class="dd-item" data-id="19">
+                    <div class="dd-handle">To Do 1</div>
+                </li>
+                <li class="dd-item" data-id="20">
+                    <div class="dd-handle">To Do 2</div>
+                    <ol class="dd-list">
+                        <li class="dd-item" data-id="21"><div class="dd-handle">To Do 3</div></li>
+                        <li class="dd-item" data-id="22">
+                            <div class="dd-handle">To Do 5</div>
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="23"><div class="dd-handle">To Do 8</div></li>
+                            </ol>
+                        <li class="dd-item" data-id="24"><div class="dd-handle">To Do 10</div></li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+
     </div>
 
 
@@ -192,8 +192,7 @@
 
     <textarea id="nestable-output"></textarea>
     <textarea id="nestable2-output"></textarea>
-
-
+    <textarea id="nestable3-output"></textarea>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>    
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -224,10 +223,12 @@
 
             $(".panel-collapse").on("hidden.bs.collapse", function(){
                 $(this).closest(".panel").find("i.fa-eye-slash").removeClass("fa-eye-slash").addClass("fa-eye");
+                $(this).closest(".panel").find("i.fa-minus-square-o").removeClass("fa-minus-square-o").addClass("fa-plus-square-o");
             });
 
             $(".panel-collapse").on("shown.bs.collapse", function(){
                $(this).closest(".panel").find("i.fa-eye").removeClass("fa-eye").addClass("fa-eye-slash");
+               $(this).closest(".panel").find("i.fa-plus-square-o").removeClass("fa-plus-square-o").addClass("fa-minus-square-o");
             });
 
             // END accordion
@@ -239,25 +240,34 @@
             {
                 var list   = e.length ? e : $(e.target),
                     output = list.data('output');
+
                 if (window.JSON) {
                     output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
                 } else {
                     output.val('JSON browser support required for this demo.');
                 }
             };
+
             // activate Nestable for list 1
             $('#nestable').nestable({
                 group: 1
-            })
-            .on('change', updateOutput);
+            }).on('change', updateOutput);
+
             // activate Nestable for list 2
             $('#nestable2').nestable({
                 group: 1
-            })
-            .on('change', updateOutput);
+            }).on('change', updateOutput);
+
+            // activate Nestable for list 3
+            $('#nestable3').nestable({
+                group: 1
+            }).on('change', updateOutput);
+
             // output initial serialised data
             updateOutput($('#nestable').data('output', $('#nestable-output')));
             updateOutput($('#nestable2').data('output', $('#nestable2-output')));
+            updateOutput($('#nestable3').data('output', $('#nestable3-output')));
+
             $('#nestable-menu').on('click', function(e)
             {
                 var target = $(e.target),
@@ -269,7 +279,6 @@
                     $('.dd').nestable('collapseAll');
                 }
             });
-            $('#nestable3').nestable();
 
             // END nestable
 

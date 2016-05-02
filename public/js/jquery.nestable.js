@@ -27,19 +27,21 @@
     })();
 
     var defaults = {
-            listNodeName    : 'ol',
-            itemNodeName    : 'li',
-            rootClass       : 'dd',
-            listClass       : 'dd-list',
-            itemClass       : 'dd-item',
-            dragClass       : 'dd-dragel',
-            handleClass     : 'dd-handle',
-            collapsedClass  : 'dd-collapsed',
-            placeClass      : 'dd-placeholder',
+            listNodeName    : 'ol', // The HTML element to create for lists (default 'ol')
+            itemNodeName    : 'li', // The HTML element to create for list items (default 'li')
+            rootClass       : 'dd', // The class of the root element .nestable() was used on (default 'dd')
+            listClass       : 'dd-list', // The class of all list elements (default 'dd-list')
+            itemClass       : 'dd-item', // The class of all list item elements (default 'dd-item')
+            dragClass       : 'dd-dragel', // The class applied to the list element that is being dragged (default 'dd-dragel')
+            handleClass     : 'dd-handle', // The class of the content element inside each list item (default 'dd-handle')
+            collapsedClass  : 'dd-collapsed', // The class applied to lists that have been collapsed (default 'dd-collapsed')
+            placeClass      : 'dd-placeholder', // The class of the placeholder element (default 'dd-placeholder')
             noDragClass     : 'dd-nodrag',
-            emptyClass      : 'dd-empty',
-            expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
-            collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
+            emptyClass      : 'dd-empty', // The class used for empty list placeholder elements (default 'dd-empty')
+            // expandBtnHTML   : '<i class="fa fa-minus-square-o fa-fw"></i>', // The HTML text used to generate a list item expand button (default '<button data-action="expand">Expand></button><button data-action="expand">Expand></button>')
+            expandBtnHTML   : '<button data-action="expand">Expand></button>', // The HTML text used to generate a list item expand button (default '<button data-action="expand">Expand></button><button data-action="expand">Expand></button>')
+            // collapseBtnHTML : '<i class="fa fa-plus-square-o fa-fw"></i>', // The HTML text used to generate a list item collapse button (default '<button data-action="collapse">Collapse</button>')
+            collapseBtnHTML : '<button data-action="collapse">Collapse</button>', // The HTML text used to generate a list item collapse button (default '<button data-action="collapse">Collapse</button>')
             group           : 0,
             maxDepth        : 5,
             threshold       : 20

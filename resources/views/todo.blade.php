@@ -62,23 +62,33 @@
 
                         <div class="panel-group" id="accordion">
 
-                            @foreach ($todos as $todo)
+                            @for ($i = 0; $i < count($todos); $i++)
 
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{{ $todo->title }}</a>
+
+                                            @if ($i === 1)
+
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">{{ $todos[$i]->title }}</a>
+
+                                            @else
+
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">{{ $todos[$i]->title }}</a>
+
+                                            @endif
+
                                         </h4>
                                     </div>
-
-                                    <div id="collapseOne" class="panel-collapse collapse">
-                                        <div class="panel-body">{{ $todo->text }}</div>
+                                        <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
+                                        <div class="panel-body">{{ $todos[$i]->text }}</div>
                                     </div>
                                 </div>
 
-                            @endforeach
+                            @endfor
 
                         </div>
+
                     </div>
                 </div>
             </div>

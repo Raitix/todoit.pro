@@ -4,8 +4,6 @@
     <h1>v0 (01.05.2016)</h1>
     <h2>Minimum viable version</h2>
     <ol>
-        <li>Volt;</li>
-        <li>Lumen, Eloquent;</li>
         <li>Bootstrap, sb_admin2;</li>
         <li>Configure e-mails (admin@todoit.pro);</li>
         <li>Internal user registration (+login existence check)</li>
@@ -29,6 +27,9 @@
     </ul>
     <h2>Done</h2>
     <ul>
+        <li>Bootstrap</li>
+        <li>Volt;</li>
+        <li>Lumen, Eloquent;</li>
         <li>Git repository created - https://github.com/Raitix/todoit.pro .</li>
         <li>Composer;</li>
         <li>NPM, NodeJS, Bower;</li>

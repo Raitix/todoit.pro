@@ -12,6 +12,10 @@
 */
 
 $app->get('/', function () use ($app) {
-    return \App\Todo::all();
-    //return $app->version();
+
+    $todos = \App\Todo::all();
+
+    return view('todo', ['todos' => $todos]);
 });
+
+$app->post('/create-todo', 'TodoController@createTodo');

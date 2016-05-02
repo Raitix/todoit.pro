@@ -67,13 +67,15 @@
 
                             @for ($i = 0; $i < count($todos); $i++)
 
-                                <div class="panel panel-default">
+                                <div class="panel panel-default" id="panel-{{ $todos[$i]->id }}" >
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
 
                                             {{ $todos[$i]->title }}
 
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}"><i class="fa fa-eye fa-fw pull-right"></i></a>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ $todos[$i]->id }}">
+                                                <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
+                                            </a>
                                         </h4>
                                     </div>
                                     <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
@@ -200,6 +202,39 @@
     <script>
         $(document).ready(function()
         {
+
+            // BEGIN modal
+
+            /* Example
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('whatever') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('.modal-title').text('New message to ' + recipient)
+                modal.find('.modal-body input').val(recipient)
+            })
+            */
+
+            // END modal
+
+
+            // BEGIN accordion
+
+            $(".panel-collapse").on("hidden.bs.collapse", function(){
+                $(this).closest(".panel").find("i.fa-eye-slash").removeClass("fa-eye-slash").addClass("fa-eye");
+            });
+
+            $(".panel-collapse").on("shown.bs.collapse", function(){
+               $(this).closest(".panel").find("i.fa-eye").removeClass("fa-eye").addClass("fa-eye-slash");
+            });
+
+            // END accordion
+
+
+            // BEGIN nestable
+
             var updateOutput = function(e)
             {
                 var list   = e.length ? e : $(e.target),
@@ -235,6 +270,9 @@
                 }
             });
             $('#nestable3').nestable();
+
+            // END nestable
+
         });
     </script>
 

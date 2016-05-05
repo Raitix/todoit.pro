@@ -15,12 +15,6 @@
     <!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/public/css/nestable.css" />
-
-    <!-- Custom Fonts -->
-    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
 </head>
 <body>
 
@@ -32,8 +26,6 @@
                         <p>
                             <div id="nestable-menu">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTodoModal">Add To Do</button>
-                                <button type="button" class="btn btn-default" data-action="expand-all">Expand All</button>
-                                <button type="button" class="btn btn-default" data-action="collapse-all">Collapse All</button>
                             </div>
 
                             <!-- Modal -->
@@ -69,38 +61,28 @@
 
                         <!-- BEGIN status todo -->
 
-                        <!-- ToDo: -->
-                        <!-- IF: wrapping div.panel into tag (except p :D) between div.panel-group -->
-                        <!-- THEN: bootstrap's accordion trigger to close other div.panel in the div.panel-group does not work -->
-                        <!-- BUT: it is needed to make wraps for /public/js/jquery.nestable.js -->
-                        <div class="col-md-3 panel-group" id="accor-nest-1">
-                            <div class="col-md-12 listNode dd-list">
+                        <div class="col-md-12 panel-group">
 
                                 @for ($i = 0; $i < count($todos); $i++)
 
-                                    <div class="col-md-12 itemNode dd-item" data-id="{{ $todos[$i]->id }}">
-                                        <!-- To Do: here to echo sb_admin2 style -->
-                                        <!-- To Do: check for id and data-id usage -->
-                                        <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}" data-id="{{ $todos[$i]->id }}">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <i class="fa @if ($i === 0) fa-minus-square-o @else fa-plus-square-o @endif fa-fw"></i>
-                                                    <i class="panel-handle fa fa-arrows fa-fw"></i>
-                                                    {{ $todos[$i]->title }}
-                                                    <a data-toggle="collapse" data-parent="#accor-nest-1" href="#collapse-{{ $todos[$i]->id }}">
-                                                        <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                                <div class="panel-body">{!! $todos[$i]->text !!}</div>
-                                            </div>
+                                    <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <i class="fa @if ($i === 0) fa-minus-square-o @else fa-plus-square-o @endif fa-fw"></i>
+                                                <i class="panel-handle fa fa-arrows fa-fw"></i>
+                                                {{ $todos[$i]->title }}
+                                                <a data-toggle="collapse" href="#collapse-{{ $todos[$i]->id }}">
+                                                    <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
+                                            <div class="panel-body">{!! $todos[$i]->text !!}</div>
                                         </div>
                                     </div>
 
                                 @endfor
 
-                            </div>
                         </div>
 
                         <!-- END status todo -->
@@ -111,70 +93,8 @@
         </div>
     </div>
 
-        <div class="panel-group" id="nestable1">
-
-            <div class="listNode dd-list">
-                <div class="itemNode dd-item" data-id="42">
-                    <div class="panel-handle">Test join</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="panel-group" id="nestable2">
-            <div class="listNode dd-list">
-                <div class="itemNode dd-item" data-id="413">
-                    <div class="panel-handle">Item 13</div>
-                </div>
-                <div class="itemNode dd-item" data-id="414">
-                    <div class="panel-handle">Item 14</div>
-                </div>
-                <div class="itemNode dd-item" data-id="415">
-                    <div class="panel-handle">Item 15</div>
-                    <div class="listNode dd-list">
-                        <div class="itemNode dd-item" data-id="416"><div class="panel-handle">Item 16</div></div>
-                        <div class="itemNode dd-item" data-id="417"><div class="panel-handle">Item 17</div></div>
-                        <div class="itemNode dd-item" data-id="418"><div class="panel-handle">Item 18</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel-group" id="nestable3">
-            <div class="listNode dd-list">
-                <div class="itemNode dd-item" data-id="419">
-                    <div class="panel-handle">To Do 1</div>
-                </div>
-                <div class="itemNode dd-item" data-id="420">
-                    <div class="panel-handle">To Do 2</div>
-                    <div class="listNode dd-list">
-                        <div class="itemNode dd-item" data-id="421"><div class="panel-handle">To Do 3</div></div>
-                        <div class="itemNode dd-item" data-id="422">
-                            <div class="panel-handle">To Do 5</div>
-                            <div class="listNode dd-list">
-                                <div class="itemNode dd-item" data-id="423"><div class="panel-handle">To Do 8</div></div>
-                            </div>
-                        <div class="itemNode dd-item" data-id="424"><div class="panel-handle">To Do 10</div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-    <p><strong>Serialised Output (per list)</strong></p>
-
-    <textarea id="nestable1-output"></textarea>
-    <textarea id="nestable2-output"></textarea>
-    <textarea id="nestable3-output"></textarea>
-    <textarea id="accor-nest-1-output"></textarea>
-
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>    
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/public/js/jquery.nestable.js"></script>
 
     <script>
         $(document).ready(function()
@@ -210,61 +130,6 @@
             });
 
             // END accordion
-
-
-            // BEGIN nestable
-
-            var updateOutput = function(e)
-            {
-                var list   = e.length ? e : $(e.target),
-                    output = list.data('output');
-
-                if (window.JSON) {
-                    output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
-                } else {
-                    output.val('JSON browser support required for this demo.');
-                }
-            };
-
-            // activate Nestable for list 1
-            $('#nestable1').nestable({
-                group: 1
-            }).on('change', updateOutput);
-
-            // activate Nestable for list 2
-            $('#nestable2').nestable({
-                group: 1
-            }).on('change', updateOutput);
-
-            // activate Nestable for list 3
-            $('#nestable3').nestable({
-                group: 1
-            }).on('change', updateOutput);
-
-            // activate Nestable for list 3
-            $('#accor-nest-1').nestable({
-                group: 1
-            }).on('change', updateOutput);
-
-            // output initial serialised data
-            updateOutput($('#nestable1').data('output', $('#nestable1-output')));
-            updateOutput($('#nestable2').data('output', $('#nestable2-output')));
-            updateOutput($('#nestable3').data('output', $('#nestable3-output')));
-            updateOutput($('#accor-nest-1').data('output', $('#accor-nest-1-output')));
-
-            $('#nestable-menu').on('click', function(e)
-            {
-                var target = $(e.target),
-                    action = target.data('action');
-                if (action === 'expand-all') {
-                    $('.panel-group').nestable('expandAll');
-                }
-                if (action === 'collapse-all') {
-                    $('.panel-group').nestable('collapseAll');
-                }
-            });
-
-            // END nestable
 
         });
     </script>

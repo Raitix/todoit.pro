@@ -66,9 +66,13 @@
                             <!-- /.modal -->
 
                         </p>
-                
+
                         <!-- BEGIN status todo -->
 
+                        <!-- ToDo: -->
+                        <!-- IF: wrapping div.panel into tag (except p :D) between div.panel-group -->
+                        <!-- THEN: bootstrap's accordion trigger to close other div.panel in the div.panel-group does not work -->
+                        <!-- BUT: it is needed to make wraps for /public/js/jquery.nestable.js -->
                         <div class="col-md-3 panel-group" id="accor-nest-1">
                             <div class="col-md-12 listNode dd-list">
 
@@ -253,10 +257,10 @@
                 var target = $(e.target),
                     action = target.data('action');
                 if (action === 'expand-all') {
-                    $('.dd').nestable('expandAll');
+                    $('.panel-group').nestable('expandAll');
                 }
                 if (action === 'collapse-all') {
-                    $('.dd').nestable('collapseAll');
+                    $('.panel-group').nestable('collapseAll');
                 }
             });
 

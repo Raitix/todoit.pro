@@ -15,6 +15,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom Fonts -->
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
@@ -61,19 +64,17 @@
 
                         <!-- BEGIN status todo -->
 
-                        <div class="col-md-12 panel-group">
+                        <div class="col-md-12 panel-group" id="panel-group-1">
 
                                 @for ($i = 0; $i < count($todos); $i++)
 
                                     <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <i class="fa @if ($i === 0) fa-minus-square-o @else fa-plus-square-o @endif fa-fw"></i>
-                                                <i class="panel-handle fa fa-arrows fa-fw"></i>
-                                                {{ $todos[$i]->title }}
-                                                <a data-toggle="collapse" href="#collapse-{{ $todos[$i]->id }}">
-                                                    <i class="fa @if ($i === 0) fa-eye-slash @else fa-eye @endif fa-fw pull-right"></i>
+                                                <a data-toggle="collapse" data-parent="#panel-group-1" href="#collapse-{{ $todos[$i]->id }}">
+                                                    <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
                                                 </a>
+                                                {{ $todos[$i]->title }}
                                             </h4>
                                         </div>
                                         <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
@@ -120,12 +121,12 @@
             // BEGIN accordion
 
             $(".panel-collapse").on("hidden.bs.collapse", function(){
-                $(this).closest(".panel").find("i.fa-eye-slash").removeClass("fa-eye-slash").addClass("fa-eye");
+                $(this).closest(".panel").find("i.fa-chevron-up").removeClass("fa-chevron-up").addClass("fa-chevron-down");
                 $(this).closest(".panel").find("i.fa-minus-square-o").removeClass("fa-minus-square-o").addClass("fa-plus-square-o");
             });
 
             $(".panel-collapse").on("shown.bs.collapse", function(){
-               $(this).closest(".panel").find("i.fa-eye").removeClass("fa-eye").addClass("fa-eye-slash");
+               $(this).closest(".panel").find("i.fa-chevron-down").removeClass("fa-chevron-down").addClass("fa-chevron-up");
                $(this).closest(".panel").find("i.fa-plus-square-o").removeClass("fa-plus-square-o").addClass("fa-minus-square-o");
             });
 

@@ -68,13 +68,13 @@
 
                                 @for ($i = 0; $i < count($todos); $i++)
 
-                                    <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}">
+                                    <div class="panel {{ $todos[$i]->getStatusData()['panel-style'] }}" id="panel-{{ $todos[$i]->id }}">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a data-toggle="collapse" data-parent="#panel-group-1" href="#collapse-{{ $todos[$i]->id }}">
                                                     <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
+                                                    {{ $todos[$i]->title }}
                                                 </a>
-                                                {{ $todos[$i]->title }}
                                             </h4>
                                         </div>
                                         <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">

@@ -17,7 +17,8 @@ class TodoController extends Controller {
 
         $todo = new Todo;
         $todo->title  = $request->input('title');
-        $todo->text  = $request->input('text');
+        $todo->text = $request->input('text');
+        $todo->status = 0; // To Do
         $todo->save();
 
         return redirect("/");

@@ -37,13 +37,10 @@ class TodoController extends Controller {
         $todo->status = $request->input('status');
 
         if ($todo->update()) {
-            //return "ok";
             return json_encode("ok");
         } else {
             return "Fail upon changing status";
         }
-
-        //return redirect("/");
     }
 
     // END ajax rpcs

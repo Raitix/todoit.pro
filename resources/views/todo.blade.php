@@ -17,6 +17,7 @@
 
     <!-- sb_admin2 CSS -->
     <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="/dist/css/main.css" rel="stylesheet">
@@ -66,8 +67,8 @@
 
                 </p>
 
-                <!-- BEGIN status todo -->
-
+                <!-- BEGIN task list -->
+ 
                 <div class="col-md-12 panel-group" id="panel-group-1">
 
                         @for ($i = 0; $i < count($todos); $i++)
@@ -79,11 +80,18 @@
                                             <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
                                             {{ $todos[$i]->title }}
                                         </a>
-                                        <em class="taskLabel pull-right">{{ $todos[$i]->getStatusData()['title'] }}</em>
+                                        <em class="taskLabel pull-right">{{ $todos[$i]->getStatusData()['panel-title'] }}</em>
                                     </h4>
                                 </div>
                                 <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                    <div class="panel-body">{!! $todos[$i]->text !!}</div>
+                                    <div class="panel-body">{{ $todos[$i]->text }}</div>
+                                    <div class="panel-footer">
+
+                                    @foreach ($todos[$i]->statuses as $statusBtn)
+                                        @include('todo_button', $statusBtn)
+                                    @endforeach
+
+                                    </div>
                                 </div>
                             </div>
 
@@ -91,7 +99,7 @@
 
                 </div>
 
-                <!-- END status todo -->
+                <!-- END task list -->
                 
             </div>
         </div>
@@ -99,6 +107,7 @@
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>    
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="/dist/js/sb-admin-2.js"></script>
 
     <script>

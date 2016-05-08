@@ -13,7 +13,7 @@
 
 $app->get('/', function () use ($app) {
 
-    $todos = \App\Todo::all();
+    $todos = \App\Todo::all()->sortByDesc("id");
 
     return view('todo', ['todos' => $todos]);
 });

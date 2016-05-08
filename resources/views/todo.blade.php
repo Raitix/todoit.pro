@@ -71,31 +71,33 @@
  
                 <div class="col-md-12 panel-group" id="panel-group-1">
 
-                        @for ($i = 0; $i < count($todos); $i++)
+                    <? $i = 0; ?>
+                    @foreach ($todos as $todo)
 
-                            <div class="panel {{ $todos[$i]->getStatusData()['panel-style'] }}" id="panel-{{ $todos[$i]->id }}">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#panel-group-1" href="#collapse-{{ $todos[$i]->id }}">
-                                            <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
-                                            {{ $todos[$i]->title }}
-                                        </a>
-                                        <em class="taskLabel pull-right">{{ $todos[$i]->getStatusData()['panel-title'] }}</em>
-                                    </h4>
-                                </div>
-                                <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                    <div class="panel-body">{!! nl2br($todos[$i]->text) !!}</div>
-                                    <div class="panel-footer">
+                        <div class="panel {{ $todo->getStatusData()['panel-style'] }}" id="panel-{{ $todo->id }}">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#panel-group-1" href="#collapse-{{ $todo->id }}">
+                                        <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
+                                        {{ $todo->title }}
+                                    </a>
+                                    <em class="taskLabel pull-right">{{ $todo->getStatusData()['panel-title'] }}</em>
+                                </h4>
+                            </div>
+                            <div id="collapse-{{ $todo->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
+                                <div class="panel-body">{!! nl2br($todo->text) !!}</div>
+                                <div class="panel-footer">
 
-                                    @foreach ($todos[$i]->statuses as $statusBtn)
-                                        @include('todo_button', $statusBtn)
-                                    @endforeach
+                                @foreach ($todo->statuses as $statusBtn)
+                                    @include('todo_button', $statusBtn)
+                                @endforeach
 
-                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <? $i++; ?>
 
-                        @endfor
+                    @endforeach
 
                 </div>
 

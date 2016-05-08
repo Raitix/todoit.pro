@@ -84,7 +84,7 @@
                                     </h4>
                                 </div>
                                 <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                    <div class="panel-body">{{ $todos[$i]->text }}</div>
+                                    <div class="panel-body">{!! nl2br($todos[$i]->text) !!}</div>
                                     <div class="panel-footer">
 
                                     @foreach ($todos[$i]->statuses as $statusBtn)

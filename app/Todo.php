@@ -21,7 +21,8 @@ class Todo extends Model
             "btn-class" => "btn-primary",
             "btn-activity" => "",
             "btn-title" => "Start",
-            "btn-icon" => "fa-play"
+            "btn-icon" => "fa-play",
+            "btn-status" => "1"
         ],
         "2" => [
             "panel-title" => "Postponed",
@@ -29,7 +30,8 @@ class Todo extends Model
             "btn-class" => "btn-warning",
             "btn-activity" => "",
             "btn-title" => "Postpone",
-            "btn-icon" => "fa-clock-o"
+            "btn-icon" => "fa-clock-o",
+            "btn-status" => "2"
         ],
         "4" => [
             "panel-title" => "Done",
@@ -37,7 +39,8 @@ class Todo extends Model
             "btn-class" => "btn-success",
             "btn-activity" => "",
             "btn-title" => "Done",
-            "btn-icon" => "fa-check"
+            "btn-icon" => "fa-check",
+            "btn-status" => "4"
         ],
         "3" => [
             "panel-title" => "Canceled",
@@ -45,7 +48,8 @@ class Todo extends Model
             "btn-class" => "btn-danger",
             "btn-activity" => "",
             "btn-title" => "Cancel",
-            "btn-icon" => "fa-times"
+            "btn-icon" => "fa-times",
+            "btn-status" => "3"
         ],
         "0" => [
             "panel-title" => "To Do",
@@ -53,7 +57,8 @@ class Todo extends Model
             "btn-class" => "btn-default",
             "btn-activity" => "",
             "btn-title" => "Restart",
-            "btn-icon" => "fa-road"
+            "btn-icon" => "fa-road",
+            "btn-status" => "0"
         ],
         "5" => [
             "panel-title" => "Hidden",
@@ -61,7 +66,8 @@ class Todo extends Model
             "btn-class" => "btn-link",
             "btn-activity" => "",
             "btn-title" => "Hide",
-            "btn-icon" => "fa-ban"
+            "btn-icon" => "fa-ban",
+            "btn-status" => "5"
         ]
     ];
 

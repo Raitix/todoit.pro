@@ -19,3 +19,10 @@ $app->get('/', function () use ($app) {
 });
 
 $app->post('/create-todo', 'TodoController@createTodo');
+
+
+// BEGIN ajax rpcs
+
+$app->post('/change-status', 'TodoController@changeStatus');
+
+// END ajax rpcs

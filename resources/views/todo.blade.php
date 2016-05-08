@@ -145,6 +145,39 @@
 
             // END accordion
 
+
+            // BEGIN ajax rpcs
+
+            $('.btnChangeStatus').on('click', function (){
+
+                var changeToStatus = $(this).data('status');
+                var changeId = $(this).data('id');
+
+                $.ajax({
+                    type : 'POST',
+                    url : '/change-status',
+                    dataType : 'json',
+                    data : {
+                        'id' : changeId,
+                        'status' : changeToStatus
+                    },
+                    success : function(data) {
+                        if (data == "ok") {
+                            location.reload();
+                        } else {
+                            console.log("Error in data when doing /change-status rpc" + data);
+                        }
+                    },
+                    error : function(err) {
+                        console.log("Error when doing /change-status rpc" + err);
+                    }
+                });
+                return false;
+
+            });
+
+            // END ajax rpcs
+
         });
     </script>
 

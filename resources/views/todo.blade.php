@@ -15,87 +15,101 @@
     <!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- sb_admin2 CSS -->
+    <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dist/css/main.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
-    <div id="wrapper">
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel-body">
-                        <p>
-                            <div id="nestable-menu">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTodoModal">Add To Do</button>
-                            </div>
-
-                            <!-- Modal -->
-                                <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form method="POST" action="/create-todo">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title" id="addTodoModal">Create new To Do</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label>Title</label>
-                                                        <input class="form-control" name="title">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Text</label>
-                                                        <textarea class="form-control" rows="3" name="text"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- /.modal -->
-
-                        </p>
-
-                        <!-- BEGIN status todo -->
-
-                        <div class="col-md-12 panel-group" id="panel-group-1">
-
-                                @for ($i = 0; $i < count($todos); $i++)
-
-                                    <div class="panel panel-success" id="panel-{{ $todos[$i]->id }}">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#panel-group-1" href="#collapse-{{ $todos[$i]->id }}">
-                                                    <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
-                                                </a>
-                                                {{ $todos[$i]->title }}
-                                            </h4>
-                                        </div>
-                                        <div id="collapse-{{ $todos[$i]->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
-                                            <div class="panel-body">{!! $todos[$i]->text !!}</div>
-                                        </div>
-                                    </div>
-
-                                @endfor
-
-                        </div>
-
-                        <!-- END status todo -->
-                        
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-body">
+                <p>
+                    <div id="nestable-menu">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTodoModal">Add To Do</button>
                     </div>
+                    <!-- Modal -->
+                        <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="POST" action="/create-todo">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="addTodoModal">Create new To Do</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <input class="form-control" name="title">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Text</label>
+                                                <textarea class="form-control" rows="3" name="text"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- /.modal -->
+
+                </p>
+
+                <!-- BEGIN task list -->
+ 
+                <div class="col-md-12 panel-group" id="panel-group-1">
+
+                    <? $i = 0; ?>
+                    @foreach ($todos as $todo)
+
+                        <div class="panel {{ $todo->getStatusData()['panel-style'] }}" id="panel-{{ $todo->id }}">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#panel-group-1" href="#collapse-{{ $todo->id }}">
+                                        <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
+                                        {{ $todo->title }}
+                                    </a>
+                                    <em class="taskLabel pull-right">{{ $todo->getStatusData()['panel-title'] }}</em>
+                                </h4>
+                            </div>
+                            <div id="collapse-{{ $todo->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
+                                <div class="panel-body">{!! nl2br($todo->text) !!}</div>
+                                <div class="panel-footer">
+
+                                @foreach ($todo->statuses as $statusBtn)
+                                    @include('todo_button', $statusBtn)
+                                @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                        <? $i++; ?>
+
+                    @endforeach
+
                 </div>
+
+                <!-- END task list -->
+                
             </div>
         </div>
     </div>
 
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>    
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="/dist/js/sb-admin-2.js"></script>
 
     <script>
         $(document).ready(function()
@@ -132,7 +146,51 @@
 
             // END accordion
 
+
+            // BEGIN ajax rpcs
+
+            $('.btnChangeStatus').on('click', function (){
+
+                var changeToStatus = $(this).data('status');
+                var changeId = $(this).data('id');
+
+                $.ajax({
+                    type : 'POST',
+                    url : '/change-status',
+                    dataType : 'json',
+                    data : {
+                        'id' : changeId,
+                        'status' : changeToStatus
+                    },
+                    success : function(data) {
+                        if (data == "ok") {
+                            location.reload();
+                        } else {
+                            console.log("Error in data when doing /change-status rpc" + data);
+                        }
+                    },
+                    error : function(err) {
+                        console.log("Error when doing /change-status rpc" + err);
+                    }
+                });
+                return false;
+
+            });
+
+            // END ajax rpcs
+
         });
+    </script>
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-18762627-16', 'auto');
+        ga('require', 'linkid');
+        ga('send', 'pageview');
     </script>
 
 </body>

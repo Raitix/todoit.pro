@@ -13,9 +13,16 @@
 
 $app->get('/', function () use ($app) {
 
-    $todos = \App\Todo::all();
+    $todos = \App\Todo::all()->sortByDesc("id")->sortBy("status");
 
     return view('todo', ['todos' => $todos]);
 });
 
 $app->post('/create-todo', 'TodoController@createTodo');
+
+
+// BEGIN ajax rpcs
+
+$app->post('/change-status', 'TodoController@changeStatus');
+
+// END ajax rpcs

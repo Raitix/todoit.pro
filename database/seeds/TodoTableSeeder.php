@@ -16,7 +16,7 @@ class TodoTableSeeder extends Seeder {
          Todo::create([
              "title" => "Test title",
              "text" => "Test text",
-             "status" => 1
+             "status" => 0
          ]);
     }
 

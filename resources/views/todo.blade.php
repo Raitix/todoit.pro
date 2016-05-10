@@ -80,17 +80,31 @@
                                         <i class="fa @if ($i === 0) fa-chevron-up @else fa-chevron-down @endif fa-fw"></i>
                                         {{ $todo->title }}
                                     </a>
-                                    <em class="taskLabel pull-right">{{ $todo->getStatusData()['panel-title'] }}</em>
+                                    <em class="taskParams pull-right">
+                                        <i class="fa {{ $todo->getStatusData()['btn-icon'] }} fa-fw"></i>
+                                        {{ $todo->getStatusData()['panel-title'] }}
+                                    </em>
                                 </h4>
                             </div>
                             <div id="collapse-{{ $todo->id }}" class="panel-collapse collapse @if ($i === 0) in @endif">
                                 <div class="panel-body">{!! nl2br($todo->text) !!}</div>
                                 <div class="panel-footer">
 
-                                @foreach ($todo->statuses as $statusBtn)
-                                    @include('todo_button', $statusBtn)
-                                @endforeach
+                                    @foreach ($todo->statuses as $statusBtn)
+                                        @include('todo_button', $statusBtn)
+                                    @endforeach
 
+                                    <em class="taskParams pull-right">
+                                        <span data-toggle="tooltip" data-placement="top" title="{{ date('F d, Y @ H:i:s', strtotime($todo->updated_at)) }}" class="taskTooltip">
+                                            <i class="fa fa-clock-o fa-fw"></i>Updated:
+                                            {{ date('F d, Y @ H:i:s', strtotime($todo->updated_at)) }}
+                                        </span>
+                                        <br>
+                                        <span data-toggle="tooltip" data-placement="top" title="" class="taskTooltip">
+                                            <i class="fa fa-clock-o fa-fw"></i>Created:
+                                            {{ date('F d, Y @ H:i:s', strtotime($todo->created_at)) }}
+                                        </span>
+                                    </em>
                                 </div>
                             </div>
                         </div>
@@ -181,7 +195,7 @@
 
         });
     </script>
-    
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -96,12 +96,12 @@
                                     @endforeach
 
                                     <em class="taskParams pull-right">
-                                        <span data-toggle="tooltip" data-placement="top" title="{{ date('F d, Y @ H:i:s', strtotime($todo->updated_at)) }}" class="taskTooltip">
+                                        <span>
                                             <i class="fa fa-clock-o fa-fw"></i>Updated:
                                             {{ date('F d, Y @ H:i:s', strtotime($todo->updated_at)) }}
                                         </span>
                                         <br>
-                                        <span data-toggle="tooltip" data-placement="top" title="" class="taskTooltip">
+                                        <span>
                                             <i class="fa fa-clock-o fa-fw"></i>Created:
                                             {{ date('F d, Y @ H:i:s', strtotime($todo->created_at)) }}
                                         </span>

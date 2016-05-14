@@ -35,7 +35,6 @@
                     <div id="nestable-menu">
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTodoModal">Add To Do</button>
                     </div>
-
                     <!-- Modal -->
                         <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
